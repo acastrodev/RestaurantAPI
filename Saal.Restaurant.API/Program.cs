@@ -32,12 +32,13 @@ namespace Saal.Restaurant.API
 
             var app = builder.Build();
 
-            if (app.Environment.IsDevelopment())
-            {
-                using var scope = app.Services.CreateScope();
-                var serviceProvider = scope.ServiceProvider;
-                serviceProvider.SeedData();
-            }
+            // Using In-Memory Database because F1 tier does not support database instance
+            //if (app.Environment.IsDevelopment())
+            //{
+            using var scope = app.Services.CreateScope();
+            var serviceProvider = scope.ServiceProvider;
+            serviceProvider.SeedData();
+            ///}
 
             app.UseSwagger();
             app.UseSwaggerUI();

@@ -8,15 +8,16 @@ namespace Saal.Restaurant.Infrastructure
     {
         public static void AddDatabaseServices(this IServiceCollection services, IConfiguration configuration, bool isDevelopment)
         {
-            if (isDevelopment)
-            {
-                services.AddDbContext<RestaurantDbContext>(options => options.UseInMemoryDatabase("RestaurantDb"));
-            }
-            else
-            {
-                var connectionString = configuration.GetConnectionString("AWSRdsConnection");
-                services.AddDbContext<RestaurantDbContext>(options => options.UseSqlServer(connectionString));
-            }
+            // Using In-Memory Database because F1 tier does not support database instance
+            //if (isDevelopment)
+            //{
+            services.AddDbContext<RestaurantDbContext>(options => options.UseInMemoryDatabase("RestaurantDb"));
+            //}
+            //else
+            //{
+            //    var connectionString = configuration.GetConnectionString("SqlServerConnection");
+            //    services.AddDbContext<RestaurantDbContext>(options => options.UseSqlServer(connectionString));
+            //}
         }
 
         public static void SeedData(this IServiceProvider serviceProvider)
